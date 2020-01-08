@@ -1,0 +1,12 @@
+<h1>{{'hello from tab page' | iz_capitalize}}</h1>
+
+<p routerLink="/login">{{'GOTO LOGIN' | iz_lowercase}}</p>
+
+<p>Misalkan ini tabnya</p>
+<ul>
+    <li (click)="chooseTab(1)">Buka tab 1</li>
+    <li (click)="chooseTab(2)">Buka tab 2</li>
+</ul>
+
+<Tab1 *ngIf="activeTab == 1"></Tab1>
+<Tab2 *ngIf="activeTab == 2"></Tab2>
