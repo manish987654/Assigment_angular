@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Employees</h4>
+  </div>
+
+  <div class="panel-body">
+    <div>
+      <input type="button" class="btn btn-success btn-small float-right" value="Add New" [routerLink] = "['add']">
+    </div>
+    <table class="table table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>PHONE</th>
+          <th>CITY</th>
+          <th>POSTAL CODE</th>
+        </tr>
+      </thead>
+      <tbody class="thead-dark">
+        <tr *ngFor = "let emp of employeeList">
+          <td>{{emp.id}}</td>
+          <td>{{emp.name}}</td>
+          <td>{{emp.phone}}</td>
+          <td>{{emp.address.city}}</td>
+          <td>{{emp.address.postal_code}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
