@@ -23,15 +23,14 @@ export class AddEmployeeComponent implements OnInit {
   // get city() { return this.employeeForm.get('address').get('city'); }
   // get postal_code() { return this.employeeForm.get('address').get('postal_code'); }
 
-
   createForm() {
     this.employeeForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       phone: ['', Validators.required],
-      address: this.fb.group({
+      address: {
         city: ['', Validators.required],
         postal_code: ['', Validators.required]
-      })  
+      }
     })
 
   }
