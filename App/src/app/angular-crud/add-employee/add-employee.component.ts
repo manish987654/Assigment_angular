@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { EmployeeService } from '../employee.service';
+import {Router, Route, ActivatedRoute} from '@angular/router';
+import { Employee } from '../employee';
+
+
 
 @Component({
   selector: 'app-add-employee',
@@ -8,10 +13,26 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class AddEmployeeComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
-
+  constructor(private fb: FormBuilder, private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute) { }
+  employee: Employee = {
+    id:0,
+    name:"",
+    phone: "",
+    address:{
+      city: "",
+      postal_code: ""
+    }
+  };
+  headerText: string;
   ngOnInit() {
+    
     this.createForm();
+    if(this.route.snapshot.params.id) {
+      this.headerText = "Update Employee";
+      this.employee = this.employeeService.employee;
+    } else {
+      this.headerText = "Create Employee";
+    }
   }
 
   employeeForm: FormGroup;
@@ -25,18 +46,34 @@ export class AddEmployeeComponent implements OnInit {
 
   createForm() {
     this.employeeForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(4)]],
+      id: [0],
+      name: ['', Validators.required],
       phone: ['', Validators.required],
-      address: {
+      address: this.fb.group({
         city: ['', Validators.required],
         postal_code: ['', Validators.required]
-      }
+      })
     })
 
   }
 
-  onSubmit() {
-   console.log("form data",this.employeeForm.value);
+  discardChanges() {
+    this.employee = {
+      id:0,
+      name:"",
+      phone: "",
+      address:{
+        city: "",
+        postal_code: ""
+      }
+    }
   }
 
+  onSubmit() {
+    if(this.route.snapshot.params.id) {
+      this.employeeService.updateEmployee(this.employeeForm.value)
+    } else {
+      this.employeeService.addEmployee(this.employeeForm.value);
+    }
+  }
 }

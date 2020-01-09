@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import {Employee } from './employee'
 import {Http, Response} from "@angular/http";
+import { Router } from '@angular/router';
+import {BehaviorSubject, Observable, observable} from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
+  employee: Employee;
+   
   empList: Employee[] =  [{
     "id": 1,
     "name": "Jhon",
@@ -35,8 +39,45 @@ export class EmployeeService {
       }
     }]
 
-  getEmployeeList() {
-    return this.empList;
- // get all employee from server/json file
+    setEmployee(employeeData) {
+      this.employee = employeeData;
+    }
+
+  getEmployee = new BehaviorSubject(this.empList)
+  getEmployeeList = this.getEmployee.asObservable();
+
+
+  addEmployee(employeeData) {
+    if(this.empList.find(emp=> emp.name == employeeData.name)) {
+      alert("Employee already exist");
+    } else {
+      employeeData.id = this.empList.length+1;
+      this.empList.push(employeeData)
+      this.router.navigateByUrl('/employeeList');
+    }
+    this.getEmployee.next(this.empList);
   }
+
+  updateEmployee(employeeData) {
+    this.empList = this.empList.map(emp => {
+                if(emp.id == employeeData.id) {
+                  emp = employeeData;
+                }
+                return emp;
+              })
+              this.getEmployee.next(this.empList);
+    this.router.navigateByUrl('/employeeList');
+  }
+
+  deleteEmployee(empId) {
+   this.empList = this.empList.filter(emp =>
+    {
+       if(emp.id != empId) {
+         return emp;
+       }
+    });
+    this.getEmployee.next(this.empList);
+
+  }
+
 }
