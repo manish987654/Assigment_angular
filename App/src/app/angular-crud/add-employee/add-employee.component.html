@@ -1,0 +1,43 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Create Employee</h4>
+  </div>
+
+  <div class="panel-body">
+    <div>
+      <input type="button" class="btn btn-success btn-small" value="Back" [routerLink]="['/employeeList']">
+    </div>
+    <div class="addEmployee">
+      <form [formGroup]="employeeForm" (ngSubmit) = "onSubmit()">
+        <div>
+          <label class="label">Name</label>
+          <input class="input form-control" type="text" formControlName="name">
+          <p class= "errorMesage" *ngIf = "fc.name.invalid && !fc.name.prestine">Name is required.</p>
+        </div>
+
+        <div>
+          <label class="label">Phone</label>
+          <input class="input form-control" type="text" formControlName="phone">
+          <p class= "errorMesage" *ngIf = "fc.phone.invalid && !fc.phone.prestine">Phone number is required.</p>
+        </div>
+    <div formGroupName="address">
+      <div>
+        <label class="label">City</label>
+        <input class="input form-control" type="text" formControlName="city">
+        <p class="errorMesage" *ngIf="fc.city.invalid && !fc.city.prestine">City is required.</p>
+      </div>
+    
+      <div>
+        <label class="label">Postal code</label>
+        <input class="input form-control" type="text" formControlName="postal_code">
+        <p class="errorMesage" *ngIf="fc.postal_code.invalid && !fc.postal_code.prestine">Postal code is required.
+        </p>
+      </div>
+    </div>
+        <br>
+        <button class="btn btn-success btn-small" [disabled] = "!employeeForm.valid" type ="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+</div>

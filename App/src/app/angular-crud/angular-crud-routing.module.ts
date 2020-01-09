@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { EmployeeLIstComponent } from './employee-list/employee-list.component';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
 
 const routes: Routes = [
-   { path: 'employeeList', loadChildren: "src/app/angular-crud/angular-crud.module#AngularCrudModule" },
-  // { path: 'login', loadChildren: "src/app/page/login/login.page.module#LoginPageModule" },
+   { path: '', component: EmployeeLIstComponent },
+   { path: 'add', component: AddEmployeeComponent }
   // { path: 'register', loadChildren: "src/app/page/register/register.page.module#RegisterPageModule" },
   // { path: 'tabpage', loadChildren: "src/app/page/page-with-tab/with-tab.page.module#WithTabPageModule" },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AngularCrudRoutingModule { }
