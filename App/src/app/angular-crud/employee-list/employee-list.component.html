@@ -5,7 +5,12 @@
 
   <div class="panel-body">
     <div>
-      <input type="button" class="btn btn-success btn-small float-right" value="Add New" [routerLink] = "['add']">
+      <div>
+        <input type="text" placeholder="Search employee" (input) = "searchEmployee($event.target.value)">
+      </div>
+      <div>
+        <input type="button" class="btn btn-success btn-small float-right" value="Add New" [routerLink] = "['add']">
+      </div>
     </div>
     <table class="table table-sm">
       <thead class="thead-dark">
@@ -15,18 +20,22 @@
           <th>PHONE</th>
           <th>CITY</th>
           <th>POSTAL CODE</th>
+          <th>ACTION</th>
         </tr>
       </thead>
       <tbody class="thead-dark">
-        <tr *ngFor = "let emp of employeeList">
+        <tr *ngFor = "let emp of filteredEmployees">
           <td>{{emp.id}}</td>
           <td>{{emp.name}}</td>
           <td>{{emp.phone}}</td>
           <td>{{emp.address.city}}</td>
           <td>{{emp.address.postal_code}}</td>
+          <button (click) = "updateEmployee(emp)">Edit</button>
+          <button (click) = "deleteEmployee(emp.id)">Delete</button>
         </tr>
       </tbody>
     </table>
+    <h5>{{noDataFound}}</h5>
   </div>
 
 </div>

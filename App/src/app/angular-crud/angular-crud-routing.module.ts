@@ -5,7 +5,8 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 
 const routes: Routes = [
    { path: '', component: EmployeeLIstComponent },
-   { path: 'add', component: AddEmployeeComponent }
+   { path: 'add', component: AddEmployeeComponent },
+   { path: 'edit/:id', component: AddEmployeeComponent } 
   // { path: 'register', loadChildren: "src/app/page/register/register.page.module#RegisterPageModule" },
   // { path: 'tabpage', loadChildren: "src/app/page/page-with-tab/with-tab.page.module#WithTabPageModule" },
 ];
