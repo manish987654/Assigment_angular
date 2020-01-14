@@ -47,12 +47,20 @@ export class EmployeeLIstComponent implements OnInit {
     this.employeeService.deleteEmployee(id);
   }
 
+  validatePhone(value) {
+    if(/^\d+$/.test(value)){
+      return value;
+    }
+    else {
+      return "NA";
+    }
+  }
+
   searchEmployee(value) {
      if(!value){
       this.assignCopy();
       } // when nothing has typed
       this.filteredEmployees = JSON.parse(JSON.stringify(this.employeeList)).filter(
-        item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1
+        item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1 || item.address.city.toLowerCase().indexOf(value.toLowerCase()) > -1
       )};
-
 }

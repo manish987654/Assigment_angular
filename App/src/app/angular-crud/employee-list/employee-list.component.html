@@ -27,7 +27,7 @@
         <tr *ngFor = "let emp of filteredEmployees">
           <td>{{emp.id}}</td>
           <td>{{emp.name}}</td>
-          <td>{{emp.phone}}</td>
+          <td>{{validatePhone(emp.phone)}}</td>
           <td>{{emp.address.city}}</td>
           <td>{{emp.address.postal_code}}</td>
           <button (click) = "updateEmployee(emp)">Edit</button> &nbsp;

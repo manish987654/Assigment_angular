@@ -58,9 +58,9 @@ export class EmployeeService {
     this.getEmployee.next(this.empList);
   }
 
-  updateEmployee(employeeData) {
+  updateEmployee(employeeData, id) {
     this.empList = this.empList.map(emp => {
-                if(emp.id == employeeData.id) {
+                if(emp.id == id) {
                   emp = employeeData;
                 }
                 return emp;

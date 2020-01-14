@@ -71,8 +71,10 @@ export class AddEmployeeComponent implements OnInit {
 
   onSubmit() {
     if(this.route.snapshot.params.id) {
-      this.employeeService.updateEmployee(this.employeeForm.value)
-    } else {
+      this.employeeForm.value.id = this.route.snapshot.params.id;
+      this.employeeService.updateEmployee(this.employeeForm.value, this.route.snapshot.params.id)
+    } else {  
+      this.employeeForm.value.id = this.employeeForm.value.id+1;
       this.employeeService.addEmployee(this.employeeForm.value);
     }
   }
