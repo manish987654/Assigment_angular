@@ -1,5 +1,4 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs';
 
@@ -9,7 +8,7 @@ import { Observable } from 'rxjs';
 export class UserService {
     itemsRef: AngularFireList<any>;
     userList:any
-  constructor(private http: HttpClient, private firebase: AngularFireDatabase) {
+  constructor( private firebase: AngularFireDatabase) {
    
    }
 

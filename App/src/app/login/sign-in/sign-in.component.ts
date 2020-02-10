@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/user.service';
+import * as firebase from "firebase";
 
 @Component({
   selector: 'app-sign-in',
@@ -16,7 +17,8 @@ export class SignInComponent implements OnInit {
   constructor( private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthService,
-    private userService: UserService) {
+    private userService: UserService
+    ) {
 
       if(this.authenticationService.currentUserValue) {
         this.router.navigateByUrl('/');
@@ -24,7 +26,10 @@ export class SignInComponent implements OnInit {
      }
 
   ngOnInit() {
-
+    if(!firebase.auth().currentUser) {
+      alert("email verification link has been sent to your email address. please verify before login.")
+    }
+    
      this.signInForm = this.formBuilder.group({
        email: ['',Validators.required],
        password: ['',Validators.required]
